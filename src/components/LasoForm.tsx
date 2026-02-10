@@ -117,8 +117,8 @@ export function LasoForm({ onSubmit, initialValues }: LasoFormProps) {
   // Năm xem: from current year + 20 down to 1930
   const viewYearOptions = Array.from({ length: currentYear + 20 - 1929 }, (_, i) => currentYear + 20 - i);
 
-  const inputClass = "w-full h-11 px-4 py-2 border border-neutral-300 bg-white text-sm font-medium focus:outline-none focus:border-neutral-500 transition-colors";
-  const selectClass = "w-full h-11 px-4 py-2 border border-neutral-300 bg-white text-sm font-medium focus:outline-none focus:border-neutral-500 cursor-pointer appearance-none";
+  const inputClass = "w-full h-11 px-4 py-2 border border-neutral-300 bg-white text-base font-medium focus:outline-none focus:border-neutral-500 transition-colors";
+  const selectClass = "w-full h-11 px-4 py-2 border border-neutral-300 bg-white text-base font-medium focus:outline-none focus:border-neutral-500 cursor-pointer appearance-none";
   const labelClass = "text-sm font-medium text-neutral-700";
 
   return (
