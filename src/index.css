@@ -354,18 +354,48 @@ body {
 }
 
 /* ===== LEGEND PANEL ===== */
+.legend-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.3s ease, opacity 0.25s ease;
+}
+
+.legend-wrapper.legend-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.legend-inner {
+  overflow: hidden;
+}
+
 .legend-panel {
   padding: 1rem 1.25rem;
   background: white;
   border: 1px solid var(--border);
   border-radius: 0.5rem;
-  animation: legendSlideIn 0.2s ease-out;
+  transform-origin: top center;
+  overflow: hidden;
 }
 
-@keyframes legendSlideIn {
-  from { opacity: 0; max-height: 0; }
-  to { opacity: 1; max-height: 500px; }
+/* ===== TIỂU HẠN SLIDE ===== */
+.tieu-han-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.3s ease, opacity 0.25s ease;
 }
+
+.tieu-han-wrapper.tieu-han-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.tieu-han-inner {
+  overflow: hidden;
+}
+
 
 /* ===== MOBILE BREAKPOINTS ===== */
 

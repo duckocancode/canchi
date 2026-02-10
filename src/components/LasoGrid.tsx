@@ -256,8 +256,12 @@ export function LasoGrid({ laso, ten }: LasoGridProps) {
       {/* Action buttons */}
       <ActionButtons gridRef={gridRef} laso={laso} showLegend={showLegend} onToggleLegend={() => setShowLegend(!showLegend)} />
 
-      {/* Legend Panel */}
-      {showLegend && <LegendPanel laso={laso} />}
+      {/* Legend Panel - always in DOM, height animated via CSS grid */}
+      <div className={`legend-wrapper ${showLegend ? 'legend-open' : ''}`}>
+        <div className="legend-inner">
+          <LegendPanel laso={laso} />
+        </div>
+      </div>
 
       {/* Đại Hạn Timeline */}
       <DaiHanTimeline laso={laso} onCungClick={(viTri) => setHoveredCung(viTri)} onTieuHanClick={(viTri) => setHoveredCung(viTri)} />

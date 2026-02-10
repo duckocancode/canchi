@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import type { Laso } from '../lib/canchi-engine';
 import { CUNG_NAMES } from '../lib/canchi-engine';
 
@@ -46,6 +46,13 @@ function calcTieuHanInDaiHan(cungDH: number, numYears: number, isNghich: boolean
 
 export function DaiHanTimeline({ laso, onCungClick, onTieuHanClick }: DaiHanTimelineProps) {
   const [selectedDaiHan, setSelectedDaiHan] = useState<number | null>(null);
+  const lastSelectedRef = useRef<number | null>(null);
+
+  // Keep track of last selection so content stays visible during close animation
+  if (selectedDaiHan !== null) {
+    lastSelectedRef.current = selectedDaiHan;
+  }
+  const displayIdx = selectedDaiHan ?? lastSelectedRef.current;
 
   // Lấy danh sách đại hạn, sort theo tuổi
   const daiHanList = laso.cung
@@ -115,45 +122,49 @@ export function DaiHanTimeline({ laso, onCungClick, onTieuHanClick }: DaiHanTime
       </div>
 
       {/* Tiểu Hạn sub-timeline */}
-      {selectedDaiHan !== null && (() => {
-        const item = daiHanList[selectedDaiHan];
-        const endAge = selectedDaiHan < daiHanList.length - 1 
-          ? daiHanList[selectedDaiHan + 1].daiHan - 1 
-          : item.daiHan + 9;
-        const tieuHanItems = getTieuHanForDaiHan(item.viTri, item.daiHan, endAge);
+      <div className={`tieu-han-wrapper ${selectedDaiHan !== null ? 'tieu-han-open' : ''}`}>
+        <div className="tieu-han-inner">
+          {displayIdx !== null && (() => {
+            const item = daiHanList[displayIdx];
+            const endAge = displayIdx < daiHanList.length - 1 
+              ? daiHanList[displayIdx + 1].daiHan - 1 
+              : item.daiHan + 9;
+            const tieuHanItems = getTieuHanForDaiHan(item.viTri, item.daiHan, endAge);
 
-        return (
-          <div className="tieu-han-sub mt-2">
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">
-                Tiểu Hạn — {item.tenCung} ({item.daiHan}–{endAge})
-              </span>
-              <span className="text-[10px] text-zinc-400">
-                ({isNghich ? 'Nghịch' : 'Thuận'})
-              </span>
-            </div>
-            <div className="dai-han-scroll">
-              <div className="flex gap-0">
-              {tieuHanItems.map((th) => {
-                const isCurrent = th.tuoi === tuoiHienTai;
-                return (
-                  <button
-                    key={th.tuoi}
-                    onClick={() => (onTieuHanClick || onCungClick)(th.cungViTri)}
-                    className={`tieu-han-item ${isCurrent ? 'tieu-han-current' : ''}`}
-                    title={`Tuổi ${th.tuoi} — ${th.chiCung} — ${th.tenCung}`}
-                  >
-                    <span className="text-[10px] font-bold">{th.tuoi}</span>
-                    <span className="text-[9px] text-zinc-500">{th.chiCung}</span>
-                    <span className="text-[9px] font-medium truncate max-w-full">{th.tenCung}</span>
-                  </button>
-                );
-              })}
+            return (
+              <div className="tieu-han-sub mt-2">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">
+                    Tiểu Hạn — {item.tenCung} ({item.daiHan}–{endAge})
+                  </span>
+                  <span className="text-[10px] text-zinc-400">
+                    ({isNghich ? 'Nghịch' : 'Thuận'})
+                  </span>
+                </div>
+                <div className="dai-han-scroll">
+                  <div className="flex gap-0">
+                  {tieuHanItems.map((th) => {
+                    const isCurrent = th.tuoi === tuoiHienTai;
+                    return (
+                      <button
+                        key={th.tuoi}
+                        onClick={() => (onTieuHanClick || onCungClick)(th.cungViTri)}
+                        className={`tieu-han-item ${isCurrent ? 'tieu-han-current' : ''}`}
+                        title={`Tuổi ${th.tuoi} — ${th.chiCung} — ${th.tenCung}`}
+                      >
+                        <span className="text-[10px] font-bold">{th.tuoi}</span>
+                        <span className="text-[9px] text-zinc-500">{th.chiCung}</span>
+                        <span className="text-[9px] font-medium truncate max-w-full">{th.tenCung}</span>
+                      </button>
+                    );
+                  })}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        );
-      })()}
+            );
+          })()}
+        </div>
+      </div>
 
       {/* Indicator cho tuổi hiện tại */}
       <div className="flex items-center gap-2 mt-1.5">
