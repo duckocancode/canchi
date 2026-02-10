@@ -21,7 +21,7 @@ interface LasoFormProps {
 export function LasoForm({ onSubmit, initialValues }: LasoFormProps) {
   const currentYear = new Date().getFullYear();
   
-  const [ten, setTen] = useState(initialValues?.ten ?? '');
+  const [ten, setTen] = useState(initialValues?.ten ?? 'Lá Số CanChi');
   const [gioiTinh, setGioiTinh] = useState<'nam' | 'nu'>(initialValues?.gioiTinh ?? 'nam');
   const [ngay, setNgay] = useState<number>(initialValues?.ngay ?? 1);
   const [thang, setThang] = useState<number>(initialValues?.thang ?? 1);

@@ -296,12 +296,17 @@ export function LasoGrid({ laso, ten }: LasoGridProps) {
               
               {/* Center panel - spans 2 cols, 2 rows */}
               <div className="laso-center">
-                <h1 className="text-xl font-bold text-center uppercase tracking-wide">
-                  {ten || 'Lá Số CanChi'}
+                <p className="text-base text-center text-muted-foreground">CanChi</p>
+                <h1 className="text-2xl font-bold text-center uppercase tracking-wide">
+                  Lá số Tử Vi
                 </h1>
                 <hr className="border-border w-1/2 mx-auto my-1" />
-                
+
                 <div className="space-y-1.5 text-base">
+                  <div className="grid grid-cols-3 gap-2">
+                    <span className="text-muted-foreground">Tên</span>
+                    <span className="font-semibold col-span-2">{ten || 'Lá Số CanChi'}</span>
+                  </div>
                   <div className="grid grid-cols-3 gap-2">
                     <span className="text-muted-foreground">Năm</span>
                     <span className="font-semibold">
