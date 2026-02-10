@@ -67,7 +67,7 @@ A Vietnamese astrology (Tử Vi Đẩu Số) chart generator — create full nat
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/canchi.git
+git clone https://github.com/duckocancode/canchi.git
 cd canchi
 
 # Install dependencies
