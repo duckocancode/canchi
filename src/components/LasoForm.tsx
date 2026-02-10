@@ -114,6 +114,8 @@ export function LasoForm({ onSubmit, initialValues }: LasoFormProps) {
 
   // Generate year options (current year down to 1930)
   const yearOptions = Array.from({ length: currentYear - 1929 }, (_, i) => currentYear - i);
+  // Năm xem: from current year + 20 down to 1930
+  const viewYearOptions = Array.from({ length: currentYear + 20 - 1929 }, (_, i) => currentYear + 20 - i);
 
   const inputClass = "w-full h-11 px-4 py-2 border border-neutral-300 bg-white text-sm font-medium focus:outline-none focus:border-neutral-500 transition-colors";
   const selectClass = "w-full h-11 px-4 py-2 border border-neutral-300 bg-white text-sm font-medium focus:outline-none focus:border-neutral-500 cursor-pointer appearance-none";
@@ -243,17 +245,20 @@ export function LasoForm({ onSubmit, initialValues }: LasoFormProps) {
 
             {/* Năm xem */}
             <div className="flex flex-col gap-1.5 col-span-2 md:col-span-1">
-              <label htmlFor="viewYearInput" className={labelClass}>Năm xem</label>
-              <input
-                type="number"
-                id="viewYearInput"
-                value={namXem}
-                onChange={(e) => setNamXem(parseInt(e.target.value) || currentYear)}
-                min={1900}
-                max={2100}
-                required
-                className={inputClass}
-              />
+              <label htmlFor="viewYearSelect" className={labelClass}>Năm xem</label>
+              <div className="relative">
+                <select
+                  id="viewYearSelect"
+                  value={namXem}
+                  onChange={(e) => setNamXem(parseInt(e.target.value) || currentYear)}
+                  className={selectClass}
+                >
+                  {viewYearOptions.map(y => (
+                    <option key={y} value={y}>{y}</option>
+                  ))}
+                </select>
+                <ChevronIcon />
+              </div>
             </div>
           </div>
 

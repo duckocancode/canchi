@@ -33,7 +33,7 @@ function App() {
               ← Sửa thông tin
             </button>
           </div>
-          <LasoGrid laso={laso} />
+          <LasoGrid laso={laso} ten={lastFormValues?.ten} />
         </div>
       )}
     </div>

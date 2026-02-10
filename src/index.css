@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Fix mobile 300ms tap delay */
+input, select, button, textarea, a {
+  touch-action: manipulation;
+}
+
 /* Custom Theme Variables */
 :root {
   --background: #ffffff;

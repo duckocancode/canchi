@@ -152,6 +152,7 @@ function getBadgeGridPosition(cung1: number, cung2: number): { x: number; y: num
 
 interface LasoGridProps {
   laso: Laso;
+  ten?: string;
 }
 
 // Grid layout: 4x4, cung được xếp theo thứ tự đặc biệt
@@ -178,7 +179,7 @@ export { GRID_CHI };
 
 const GRID_FIXED_WIDTH = 960;
 
-export function LasoGrid({ laso }: LasoGridProps) {
+export function LasoGrid({ laso, ten }: LasoGridProps) {
   // State cho việc hover cung - chỉ highlight khi đang hover
   const [hoveredCung, setHoveredCung] = useState<number | null>(null);
 
@@ -295,9 +296,8 @@ export function LasoGrid({ laso }: LasoGridProps) {
               
               {/* Center panel - spans 2 cols, 2 rows */}
               <div className="laso-center">
-                <p className="text-base text-center text-muted-foreground">CanChi</p>
-                <h1 className="text-2xl font-bold text-center uppercase tracking-wide">
-                  Lá số Tử Vi
+                <h1 className="text-xl font-bold text-center uppercase tracking-wide">
+                  {ten || 'Lá Số CanChi'}
                 </h1>
                 <hr className="border-border w-1/2 mx-auto my-1" />
                 
