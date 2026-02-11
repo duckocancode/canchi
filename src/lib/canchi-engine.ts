@@ -1541,17 +1541,9 @@ export function tinhLaso(input: LasoInput): Laso {
   const cungArr: Cung[] = [];
   
   for (let i = 1; i <= 12; i++) {
-    // Tên cung Mệnh tại vị trí này
-    // Nghịch lý (Dương Nữ, Âm Nam): theo chiều kim đồng hồ (tăng cung)
-    // Thuận lý (Dương Nam, Âm Nữ): ngược chiều kim đồng hồ (giảm cung)
-    let menhOffset: number;
-    if (isThuan) {
-      // Thuận lý: ngược chiều kim đồng hồ
-      menhOffset = (cungMenh - i + 12) % 12;
-    } else {
-      // Nghịch lý: theo chiều kim đồng hồ
-      menhOffset = (i - cungMenh + 12) % 12;
-    }
+    // Tên 12 cung LUÔN đi nghịch chiều kim đồng hồ (giảm Chi) từ Mệnh
+    // Thuận/nghịch chỉ ảnh hưởng đại hạn, KHÔNG ảnh hưởng tên cung
+    const menhOffset = (i - cungMenh + 12) % 12;
     const tenCungMenh = CUNG_ORDER[menhOffset];
     
     // Chính tinh tại cung này
